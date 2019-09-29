@@ -32,6 +32,10 @@
 
 #import "DeviceDataLibrery.h"
 
+// 下面是获取运营商的头文件
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+
 @implementation DeviceInfoManager
 
 + (instancetype)sharedManager {
@@ -158,6 +162,26 @@
 
 - (NSString *)getCPUProcessor {
     return [[DeviceDataLibrery sharedLibrery] getCPUProcessor] ? : @"unKnown";
+}
+
+- (NSString *)getCarrierName {
+    //获取本机运营商名称
+    
+    CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [info subscriberCellularProvider];
+    
+    //当前手机所属运营商名称
+    NSString *mobile;
+    //先判断有没有SIM卡，如果没有则不获取本机运营商
+    if (!carrier.isoCountryCode) {
+        // 需要注意的是，当你的手机内没有SIM卡时，这时获取到的运营商名称为手机的默认运营商，比如电信版手机名称为中国电信
+        // 这里做了特殊处理，无卡就返回 无运营商
+        NSLog(@"没有SIM卡");
+        mobile = @"无运营商";
+    }else{
+        mobile = [carrier carrierName];
+    }
+    return mobile;
 }
 
 #pragma mark - CPU

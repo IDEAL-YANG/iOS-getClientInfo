@@ -18,5 +18,9 @@
 
 - (NSString *)getIpAddressWIFI;
 - (NSString *)getIpAddressCell;
+    
+- (NSString*)getPublicIP;
+    
++ (NSString *)getIPAddress:(BOOL)preferIPv4;
 
 @end

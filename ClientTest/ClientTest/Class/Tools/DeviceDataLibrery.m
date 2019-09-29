@@ -230,7 +230,7 @@ typedef NS_ENUM(NSUInteger, DiviceType) {
     if ([machineString isEqualToString:@"iPad7,2"])     return iPad_Pro_129inch_2nd_gen_Cellular;
     if ([machineString isEqualToString:@"iPad7,3"])     return iPad_Pro_105inch_WiFi;
     if ([machineString isEqualToString:@"iPad7,4"])     return iPad_Pro_105inch_Cellular;
-    if ([machineString isEqualToString:@"iPad7,6"])     return iPad_6,
+    if ([machineString isEqualToString:@"iPad7,6"])     return iPad_6;
     
     if ([machineString isEqualToString:@"AppleTV2,1"])  return appleTV2;
     if ([machineString isEqualToString:@"AppleTV3,1"])  return appleTV3;

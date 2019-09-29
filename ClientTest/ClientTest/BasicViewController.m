@@ -76,6 +76,15 @@
 #pragma mark - private Method
 
 - (void)_setupHardwareInfo {
+    NSString *carrirName = [[DeviceInfoManager sharedManager] getCarrierName];
+    [self _addInfoWithKey:@"设备运营商" infoValue:carrirName];
+    
+    [self _addInfoWithKey:@"屏幕大小(size)" infoValue:NSStringFromCGSize([UIScreen mainScreen].bounds.size)];
+    
+    [self _addInfoWithKey:@"物理分辨率(size)" infoValue:NSStringFromCGSize([UIScreen mainScreen].nativeBounds.size)];
+    
+    [self _addInfoWithKey:@"屏幕比例(scale)" infoValue:[NSString stringWithFormat:@"%f",[UIScreen mainScreen].scale]];
+    
     const NSString *deviceName = [[DeviceInfoManager sharedManager] getDeviceName];
     [self _addInfoWithKey:@"设备型号" infoValue:[deviceName copy]];
     
@@ -172,6 +181,8 @@
     
     NSString *wifiIP = [[NetWorkInfoManager sharedManager] getIpAddressWIFI];
     [self _addInfoWithKey:@"WIFI IP地址" infoValue:wifiIP];
+    
+    [self _addInfoWithKey:@"公网IP地址" infoValue:[NetWorkInfoManager getIPAddress:true]];
 }
 
 - (void)_setupCPUInfo {
@@ -221,7 +232,7 @@
     NSString *freeMemoryInfo = [NSString stringWithFormat:@" %.2f MB == %.2f GB", freeMemory/1024/1024.0, freeMemory/1024/1024/1024.0];
     [self _addInfoWithKey:@"空闲的内存空间" infoValue:freeMemoryInfo];
     
-    int64_t usedMemory = [[DeviceInfoManager sharedManager] getFreeDiskSpace];
+    int64_t usedMemory = [[DeviceInfoManager sharedManager] getUsedMemory];
     NSString *usedMemoryInfo = [NSString stringWithFormat:@" %.2f MB == %.2f GB", usedMemory/1024/1024.0, usedMemory/1024/1024/1024.0];
     [self _addInfoWithKey:@"已使用的内存空间" infoValue:usedMemoryInfo];
     

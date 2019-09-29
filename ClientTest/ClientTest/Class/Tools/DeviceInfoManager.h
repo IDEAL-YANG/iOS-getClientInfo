@@ -38,6 +38,8 @@
 - (NSUInteger)getBusFrequency;
 /** 获取当前设备主存 */
 - (NSUInteger)getRamSize;
+/** 获取当前设备运营商 */
+- (NSString *)getCarrierName;
 
 - (NSString *)getCPUProcessor;
 /** 获取CPU数量 */
